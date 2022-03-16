@@ -17,23 +17,28 @@ namespace example {
 	public ref class ManagedClass {
 	public:
 		// Allocate the native object on the C++ Heap via a constructor
-		ManagedClass() : m_Impl(new UnmanagedClass) {}
+		ManagedClass() : m_Impl(new UnmanagedClass) {
+			std::cout << "impl created!\n";
+		}
 
 		// Deallocate the native object on a destructor
 		~ManagedClass() {
 			delete m_Impl;
+			std::cout << "impl deleated!\n";
 		}
 
 	protected:
 		// Deallocate the native object on the finalizer just in case no destructor is called
 		!ManagedClass() {
 			delete m_Impl;
+			std::cout << "impl finalizer called!\n";
 		}
 
 	public:
 		property System::String^ get_PropertyA {
 			System::String^ get() {
-				return gcnew System::String(m_Impl->GetPropertyA());
+		//		return gcnew System::String(m_Impl->GetPropertyA());
+				return gcnew System::String("property A");
 			}
 		}
 
