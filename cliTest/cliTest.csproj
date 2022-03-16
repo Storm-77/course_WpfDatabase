@@ -13,4 +13,10 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Engine">
+      <HintPath>..\bin\Debug\Engine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
