@@ -1,4 +1,3 @@
-#include <iostream>
 
 
 extern "C" __declspec(dllexport) int __stdcall myFunction() {
