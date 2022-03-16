@@ -8,4 +8,8 @@
     <StartupObject />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>$(SolutionDir)bin</OutputPath>
+  </PropertyGroup>
+
 </Project>
