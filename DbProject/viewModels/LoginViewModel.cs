@@ -9,12 +9,25 @@ namespace DbProject.viewModels
 {
     class LoginViewModel : ViewModelBase
     {
-        private ICommand m_loginCommand;    
+        private ICommand _loginCommand;
         private string m_login;
         private string m_password;
+
+        public string Login
+        {
+            get
+            {
+                return m_login;
+            }
+            set
+            {
+                m_login = value;
+            }
+        }
+
         public LoginViewModel()
         {
-            m_loginCommand = new commands.LoginCommand();
+            _loginCommand = new commands.LoginCommand();
         }
 
     }

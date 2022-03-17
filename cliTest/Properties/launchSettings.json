@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "cliTest": {
-      "commandName": "Project",
-      "workingDirectory": "$(SolutionDir)bin\\Debug"
-    }
-  }
-}

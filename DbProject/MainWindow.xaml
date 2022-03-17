@@ -8,6 +8,6 @@
         xmlns:views="clr-namespace:DbProject.views"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <views:Login DataContext="{Binding CurrentViewModel}" />    
+        <views:Login DataContext="{Binding CurrentViewModel}"/>    
     </Grid>
 </Window>

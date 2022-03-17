@@ -22,7 +22,7 @@ namespace DbProject
     {
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
     }
 }

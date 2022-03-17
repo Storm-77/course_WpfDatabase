@@ -11,7 +11,7 @@ namespace DbProject.viewModels
         private ViewModelBase _currentViewModel;
         public MainViewModel(ViewModelBase initial)
         {
-            _currentViewModel = initial;
+           CurrentViewModel = initial;
 
         }
 

@@ -23,12 +23,10 @@ namespace DbProject
             MainWindow.Show();
 
 
-            
+
+
 
             base.OnStartup(e);
-
         }
-
-
     }
 }
