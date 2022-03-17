@@ -59,6 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions); PROJECT_ENGINE_CORE;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,7 +84,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Blob.cpp" />
+    <ClCompile Include="src\Record.cpp" />
     <ClCompile Include="src\source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Blob.hpp" />
+    <ClInclude Include="src\Core.hpp" />
+    <ClInclude Include="src\DataBase.hpp" />
+    <ClInclude Include="src\Record.hpp" />
+    <ClInclude Include="src\Table.hpp" />
+    <ClInclude Include="src\todo.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
