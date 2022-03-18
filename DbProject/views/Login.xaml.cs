@@ -15,14 +15,16 @@ using System.Windows.Shapes;
 
 namespace DbProject.views
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Login.xaml
-    /// </summary>
     public partial class Login : UserControl
     {
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            (DataContext as viewModels.LoginViewModel).Password = (sender as PasswordBox).Password;
         }
     }
 }

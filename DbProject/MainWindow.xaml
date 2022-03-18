@@ -4,10 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DbProject"
-        mc:Ignorable="d"
+        xmlns:vms="clr-namespace:DbProject.viewModels"
         xmlns:views="clr-namespace:DbProject.views"
+        mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <views:Login DataContext="{Binding CurrentViewModel}"/>    
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:LoginViewModel}">
+                <views:Login/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:MenuViewModel}">
+                <views:Menu/>
+            </DataTemplate>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

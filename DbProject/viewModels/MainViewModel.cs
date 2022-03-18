@@ -11,7 +11,7 @@ namespace DbProject.viewModels
         private ViewModelBase _currentViewModel;
         public MainViewModel(ViewModelBase initial)
         {
-           CurrentViewModel = initial;
+            CurrentViewModel = initial;
 
         }
 
@@ -24,6 +24,12 @@ namespace DbProject.viewModels
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
             }
+        }
+
+        public static void SetViewModel(viewModels.ViewModelBase nextViewModel)
+        {
+            var vm = App.Current.MainWindow.DataContext as MainViewModel;
+            vm.CurrentViewModel = nextViewModel;
         }
     }
 }
