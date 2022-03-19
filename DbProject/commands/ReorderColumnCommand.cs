@@ -37,36 +37,37 @@ namespace DbProject.commands
 
         private void TableCreationViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(TableCreationViewModel.SelectedItem))
+            if (e.PropertyName == nameof(TableCreationViewModel.SelectedIndex) || e.PropertyName == nameof(TableCreationViewModel.SelectedItem))
             {
-                OnCanExecutedChanged();
+                OnCanExecuteChanged();
             }
         }
 
         public override bool CanExecute(object parameter)
         {
-            if (m_tableCreationViewModel.SelectedItem == null || m_columns.Count <= 1)
+            if (m_tableCreationViewModel.SelectedIndex == -1 || m_columns.Count <= 1)
                 return false;
 
-            int index = m_columns.IndexOf(m_tableCreationViewModel.SelectedItem);
+            int index = m_tableCreationViewModel.SelectedIndex;
             if (m_offset != 0)
             {
-
-                bool chk = index + m_offset >= 0;
-                bool chk1 = index + m_offset < m_columns.Count;
-
-                return index != -1 && chk && chk1;
+                return index != -1 && index + m_offset >= 0 && index + m_offset < m_columns.Count;
             }
             else
             {
-                return true;
+                //logic for target index
+                int i = m_targetIndex;
+                if (m_targetIndex == -1)
+                    i = m_columns.Count - 1;
+
+                return index != -1 && i != index;
             }
 
         }
 
         public override void Execute(object parameter)
         {
-            int index = m_columns.IndexOf(m_tableCreationViewModel.SelectedItem);
+            int index = m_tableCreationViewModel.SelectedIndex;
             if (m_offset != 0)
             {
                 m_columns.Move(index, index + m_offset);
@@ -79,6 +80,8 @@ namespace DbProject.commands
             }
 
             m_columns.Move(index, m_targetIndex);
+
+            OnCanExecuteChanged();
         }
     }
 }

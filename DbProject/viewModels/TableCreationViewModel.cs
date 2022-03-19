@@ -40,6 +40,20 @@ namespace DbProject.viewModels
                 m_selectedItem = value;
                 this.OnPropertyChanged(nameof(SelectedItem));
             }
+        } 
+        
+        private int m_selectedIndex;
+        public int SelectedIndex
+        {
+            get
+            {
+                return m_selectedIndex;
+            }
+            set
+            {
+                m_selectedIndex = value;
+                this.OnPropertyChanged(nameof(SelectedIndex));
+            }
         }
 
         private string m_name;

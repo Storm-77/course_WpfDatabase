@@ -24,7 +24,7 @@ namespace DbProject.commands
         {
             if(e.PropertyName == nameof(TableCreationViewModel.SelectedItem))
             {
-                OnCanExecutedChanged();
+                OnCanExecuteChanged();
             }
         }
 

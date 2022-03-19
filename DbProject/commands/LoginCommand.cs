@@ -37,7 +37,7 @@ namespace DbProject.commands
             if (e.PropertyName == nameof(viewModels.LoginViewModel.Login) ||
                 e.PropertyName == nameof(viewModels.LoginViewModel.Password))
             {
-                OnCanExecutedChanged();
+                OnCanExecuteChanged();
             }
             
         }
