@@ -8,14 +8,26 @@ namespace DbProject.viewModels
 {
     public enum FieldType
     {
-        Integer,
-        Text,
-        Blob,
-        Real
+        INT,
+        VARCHAR,
+        BIGINT,
+        FLOAT,
+        DOUBLE,
+        BOOL,
+        TEXT
     };
 
     class TableColumnViewModel : ViewModelBase
     {
+
+        public string ToSql()
+        {
+            string nn = NotNull ? "NOT NULL" : "";
+            string ai = AutoIncrement ? "AUTO INCREMENT" : "";
+            string pk = PrimaryKey ? "PRIMARY KEY" : "";
+            return $"{Name} {Type.ToString()} {nn} {ai} {pk}";
+        }
+
         private string m_name;
         public string Name
         {

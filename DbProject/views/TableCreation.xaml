@@ -27,9 +27,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" >Table name:</TextBlock>
-            <TextBox Grid.Row="1" Margin="0 0 0 10"  Text="{Binding Name}"/>
+            <TextBox Grid.Row="1" Margin="0 0 0 10"  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 0 0 10">
                 <StackPanel.Resources>
@@ -49,7 +50,7 @@
             <DataGrid ItemsSource="{Binding Columns}" 
                       HeadersVisibility="Column" AutoGenerateColumns="False"
                       CanUserAddRows="False"
-                      CanUserSortColumns="True"
+                      CanUserSortColumns="False"
                       SelectedItem="{Binding SelectedItem}"
                       SelectedIndex="{Binding SelectedIndex}"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -108,6 +109,13 @@
                 </DataGrid.Columns>
             </DataGrid>
 
+            <RichTextBox Grid.Row="4">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="{Binding SqlStatement}"></Run>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
         </Grid>
     </Grid>
 </UserControl>

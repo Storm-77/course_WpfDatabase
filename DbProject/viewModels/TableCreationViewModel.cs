@@ -9,150 +9,56 @@ using System.Windows.Input;
 
 namespace DbProject.viewModels
 {
-    class TableCreationViewModel : ViewModelBase
+    partial class TableCreationViewModel : ViewModelBase
     {
         private ObservableCollection<TableColumnViewModel> m_columns;
 
         public IEnumerable<TableColumnViewModel> Columns => m_columns;
 
-
         public TableCreationViewModel()
         {
             m_columns = new();
-            AddColumnCommand = new commands.AddColumnCommand(m_columns);
+            AddColumnCommand = new commands.AddColumnCommand(this,m_columns);
             RemoveColumnCommand = new commands.RemoveColumnCommand(this, m_columns);
 
             MoveColumnUpCommand = new commands.ReorderColumnCommand(this, true);
             MoveColumnDownCommand = new commands.ReorderColumnCommand(this, false);
             MoveColumnTopCommand = new commands.ReorderColumnCommand(this, 0);
             MoveColumnBottomCommand = new commands.ReorderColumnCommand(this, -1);
+            m_columns.CollectionChanged += CollectionChanged;
+            PropertyChanged += NamePropertyChanged;
         }
 
-        private TableColumnViewModel m_selectedItem;
-        public TableColumnViewModel SelectedItem
+        private void NamePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            get
-            {
-                return m_selectedItem;
-            }
-            set
-            {
-                m_selectedItem = value;
-                this.OnPropertyChanged(nameof(SelectedItem));
-            }
-        } 
-        
-        private int m_selectedIndex;
-        public int SelectedIndex
-        {
-            get
-            {
-                return m_selectedIndex;
-            }
-            set
-            {
-                m_selectedIndex = value;
-                this.OnPropertyChanged(nameof(SelectedIndex));
-            }
+            if (e.PropertyName == nameof(Name))
+                GenSql();
         }
 
-        private string m_name;
-        public string Name
+        private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            get
-            {
-                return m_name;
-            }
-            set
-            {
-                m_name = value;
-                this.OnPropertyChanged(nameof(Name));
-            }
+            GenSql();
         }
 
-        private ICommand m_addColumnCommand;
-        public ICommand AddColumnCommand
+        public void GenSql()
         {
-            get
-            {
-                return m_addColumnCommand;
-            }
-            set
-            {
-                m_addColumnCommand = value;
-                this.OnPropertyChanged(nameof(AddColumnCommand));
-            }
-        }
-        
-        private ICommand m_removeColumnCommand;
-        public ICommand RemoveColumnCommand
-        {
-            get
-            {
-                return m_removeColumnCommand;
-            }
-            set
-            {
-                m_removeColumnCommand = value;
-                this.OnPropertyChanged(nameof(RemoveColumnCommand));
-            }
-        } 
-        
+            string sql =
+            $"CREATE TABLE {Name} (\n";
 
-        private ICommand m_moveColumnUpCommand;
-        public ICommand MoveColumnUpCommand
-        {
-            get
+            foreach(var col in m_columns)
             {
-                return m_moveColumnUpCommand;
+                sql += '\t';
+                sql += col.ToSql();
+                if(col != m_columns.Last())
+                {
+                    sql += ',';
+                    sql += '\n';
+                }
             }
-            set
-            {
-                m_moveColumnUpCommand = value;
-                this.OnPropertyChanged(nameof(MoveColumnUpCommand));
-            }
-        }
-        
-        private ICommand m_moveColumnDownCommand;
-        public ICommand MoveColumnDownCommand
-        {
-            get
-            {
-                return m_moveColumnDownCommand;
-            }
-            set
-            {
-                m_moveColumnDownCommand = value;
-                this.OnPropertyChanged(nameof(MoveColumnDownCommand));
-            }
-        }
-        
-        private ICommand m_moveColumnBottomCommand;
-        public ICommand MoveColumnBottomCommand
-        {
-            get
-            {
-                return m_moveColumnBottomCommand;
-            }
-            set
-            {
-                m_moveColumnBottomCommand = value;
-                this.OnPropertyChanged(nameof(MoveColumnBottomCommand));
-            }
-        } 
-        
-        private ICommand m_moveColumnTopCommand;
-        public ICommand MoveColumnTopCommand
-        {
-            get
-            {
-                return m_moveColumnTopCommand;
-            }
-            set
-            {
-                m_moveColumnTopCommand = value;
-                this.OnPropertyChanged(nameof(MoveColumnTopCommand));
-            }
+
+            sql += $"\n);";
+
+            SqlStatement = sql;
         }
 
     }
