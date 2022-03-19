@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="DbProject.views.TableCreation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:DbProject.views"
+             xmlns:vms="clr-namespace:DbProject.viewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:Background="Aqua"
+             >
+    
+    <Grid>
+        <!--
+        -->
+        <Grid.Resources>
+            <ObjectDataProvider x:Key="fieldTypeEnum" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type Type="vms:FieldType"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </Grid.Resources>
+            
+        <StackPanel>
+            <TextBlock >Table name:</TextBlock>
+            <TextBox Margin="0 0 0 10"  Text="{Binding Name}"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="0 0 10 0"></Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Command="{Binding AddColumnCommand}">Add Column</Button>
+                <Button Command="{Binding RemoveColumnCommand}" >RemoveColumn</Button>
+
+                <Button Command="{Binding MoveColumnUpCommand}" >Move up</Button>
+                <Button Command="{Binding MoveColumnDownCommand}" >Move down</Button>
+                <Button Command="{Binding MoveColumnTopCommand}" >Move to the top</Button>
+                <Button Command="{Binding MoveColumnBottomCommand}" >Move to the bottom</Button>
+            </StackPanel>
+
+            <DataGrid ItemsSource="{Binding Columns}" 
+                      HeadersVisibility="Column" AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      CanUserSortColumns="True"
+                      SelectedItem="{Binding SelectedItem}"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="3*"
+                            Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                    <DataGridComboBoxColumn Header="Type" Width="2*"
+                        SelectedValueBinding="{Binding Type, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Source={StaticResource fieldTypeEnum}}" 
+                                            />
+                <!--
+                -->
+
+                    <DataGridCheckBoxColumn Header="Not null" 
+                                            Width="*"
+                                            Binding="{Binding NotNull, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridCheckBoxColumn Header="Auto increment"
+                                            Width="*"
+                                            Binding="{Binding AutoIncrement, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridCheckBoxColumn Header="Primary key"
+                                            Width="*"
+                                            Binding="{Binding PrimaryKey, UpdateSourceTrigger=PropertyChanged}" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -17,7 +17,8 @@ namespace DbProject
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new viewModels.MainViewModel(new viewModels.LoginViewModel())
+                //DataContext = new viewModels.MainViewModel(new viewModels.LoginViewModel())
+                DataContext = new viewModels.MainViewModel(new viewModels.TableCreationViewModel())
             };
 
             MainWindow.Show();

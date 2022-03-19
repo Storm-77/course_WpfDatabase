@@ -13,6 +13,7 @@ namespace DbProject.viewModels
         public MenuViewModel()
         {
             SomeCommand = new commands.MessageCommand("that is my message to you");
+            CreateTableBtn = new commands.NavigateCommand(new viewModels.TableCreationViewModel());
         }
 
         private ICommand m_someCommand;
@@ -26,6 +27,20 @@ namespace DbProject.viewModels
             {
                 m_someCommand = value;
                 this.OnPropertyChanged(nameof(SomeCommand));
+            }
+        }
+        
+        private ICommand m_createTable;
+        public ICommand CreateTableBtn
+        {
+            get
+            {
+                return m_createTable;
+            }
+            set
+            {
+                m_createTable= value;
+                this.OnPropertyChanged(nameof(CreateTableBtn));
             }
         }
     }

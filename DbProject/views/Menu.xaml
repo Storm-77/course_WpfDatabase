@@ -11,7 +11,7 @@
         <Button Command="{Binding SomeCommand}">hello there</Button>
         <TextBlock>THAT IS MENU VIEW!1</TextBlock>
         <Button >hello there1</Button>
-        <TextBlock>THAT IS MENU VIEW!2</TextBlock>
-        <Button>hello there2</Button>
+        <TextBlock>asadsd</TextBlock>
+        <Button Command="{Binding CreateTableBtn}">CreateTable</Button>
     </StackPanel>
 </UserControl>

@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type vms:MenuViewModel}">
                 <views:Menu/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:TableCreationViewModel}">
+                <views:TableCreation/>
+            </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}"/>
     </Grid>
