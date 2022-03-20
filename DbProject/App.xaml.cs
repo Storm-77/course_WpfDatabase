@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using DbProject.dbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace DbProject
 {
@@ -21,6 +23,14 @@ namespace DbProject
                 DataContext = new viewModels.MainViewModel(new viewModels.TableCreationViewModel())
             };
 
+            DbContextFactory factory = new("server=localhost;user=root;database=test;password=;port=3306");
+
+            using(PrimaryDbContext context = factory.CreateDbContext())
+            {
+                context.Database.Migrate();
+            }
+
+ 
             MainWindow.Show();
 
 
